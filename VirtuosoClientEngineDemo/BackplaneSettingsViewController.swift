@@ -13,6 +13,9 @@ class BackplaneSettingsViewController: UIViewController {
     @IBOutlet weak var backplaneUrlTextField: UITextField!
     @IBOutlet weak var publicKeyTextField: UITextField!
     @IBOutlet weak var privateKeyTextField: UITextField!
+    @IBOutlet var scrollView: UIScrollView!
+    
+    var activeField: UITextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,46 @@ class BackplaneSettingsViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         
         loadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc private func keyboardWasShown(notification: NSNotification) {
+        guard let activeField = activeField else {
+            return
+        }
+        let info = notification.userInfo as NSDictionary?
+        guard let kbSize = (info?.object(forKey: UIKeyboardFrameBeginUserInfoKey) as? CGRect)?.size else {
+            return
+        }
+        
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        // Your app might not need or want this behavior.
+        var aRect = self.view.frame;
+        aRect.size.height -= kbSize.height;
+        if (!aRect.contains(activeField.frame.origin) ) {
+            self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero;
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     enum UserDefaultsKeys: String {
@@ -81,6 +124,14 @@ class BackplaneSettingsViewController: UIViewController {
 extension BackplaneSettingsViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeField = nil
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
