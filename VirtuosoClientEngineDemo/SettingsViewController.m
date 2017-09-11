@@ -24,6 +24,7 @@
 #import "UIActionSheet+MKBlockAdditions.h"
 #import "UIBlockSwitch.h"
 #import "MBProgressHUD/MBProgressHUD.h"
+#import "VirtuosoClientEngineDemo-Swift.h"
 
 @interface SettingsViewController ()
 {
@@ -135,12 +136,15 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if( section == 0 )
+        return @"Backplane settings";
+    
+    if( section == 1 )
         return @"Engine Status";
     
     if( section == 2 )
@@ -153,12 +157,15 @@
 {
     // Return the number of rows in the section.
     if( section == 0 ) // Engine/Device status
-        return 8;
+        return 1;
     
-    if( section == 2 ) // Device list
+    if( section == 1 ) // Engine/Device status
+        return 9;
+    
+    if( section == 3 ) // Device list
         return [VirtuosoDownloadEngine instance].devices.count;
     
-    if( section == 1 ) // Engine settings
+    if( section == 2 ) // Engine settings
         return 7;
     
     return 4;
@@ -176,7 +183,11 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.accessoryView = nil;
     
-    if( indexPath.section == 0 )
+    if( indexPath.section == 0 ) {
+        cell.textLabel.text = @"Change backplane settings";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else if( indexPath.section == 1 )
     {
         switch (indexPath.row) {
             case 0:
@@ -347,11 +358,16 @@
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",(int)[VirtuosoSettings instance].numberOfDevicesEnabled];
                 break;
 
+            case 8:
+                cell.textLabel.text = @"Permitted Segment Download Errors";
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", (int)[VirtuosoSettings instance]. permittedSegmentDownloadErrors];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
             default:
                 break;
         }
     }
-    else if( indexPath.section == 1 )
+    else if( indexPath.section == 2 )
     {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.accessoryView = nil;
@@ -426,7 +442,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 2 )
+    else if( indexPath.section == 3 )
     {
         VirtuosoDevice* device = [[VirtuosoDownloadEngine instance].devices objectAtIndex:indexPath.row];
         
@@ -445,9 +461,36 @@
 
     if( indexPath.section == 0 )
     {
-        // Nothing to do
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        BackplaneSettingsViewController *newView = [[BackplaneSettingsViewController alloc]initWithNibName:@"BackplaneSettings" bundle:nil];
+        [self.navigationController pushViewController:newView animated:YES];
     }
     else if( indexPath.section == 1 )
+    {
+        switch (indexPath.row) {
+            case 8:
+            {
+                [ModalAlert ask:@"New permittedSegmentDownloadErrors?"
+                 withTextPrompt:@"permittedSegmentDownloadErrors"
+               withKeyboardType:UIKeyboardTypeNumberPad
+         withAutoCapitalization:UITextAutocapitalizationTypeNone
+            withSecureTextEntry:NO
+               withInitialValue:[NSString stringWithFormat:@"%d", (int)[VirtuosoSettings instance].permittedSegmentDownloadErrors] onResponse:^(NSString *permittedSegmentDownloadErrors) {
+                   if( permittedSegmentDownloadErrors != nil )
+                   {
+                       [VirtuosoSettings instance].permittedSegmentDownloadErrors = [permittedSegmentDownloadErrors intValue];
+                       [tableView reloadData];
+                   }
+               }];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else if( indexPath.section == 2 )
     {
         switch (indexPath.row) {
             case 0:

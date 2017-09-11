@@ -19,6 +19,7 @@
 
 #import "AddNewItemViewController.h"
 #import "MBProgressHUD/MBProgressHUD.h"
+#import "VirtuosoClientEngineDemo-Swift.h"
 
 /*
  * NOTE: These are for test/demo purposes only and you should NEVER access these directly.  They are used here
@@ -83,29 +84,33 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 5;
+    return 6;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
+            return @"LGI HSS Asset";
+            break;
+
+        case 1:
             return @"Subscriptions";
             break;
             
-        case 1:
+        case 2:
             return @"Autoparsed HLS Video";
             break;
 
-        case 2:
+        case 3:
             return @"Autoparsed DASH Video";
             break;
             
-        case 3:
+        case 4:
             return @"Single MP4 Files";
             break;
 
-        case 4:
+        case 5:
             return @"Failure Modes";
             break;
             
@@ -120,22 +125,26 @@
 {
     switch (section) {
         case 0:
-            return 3;
+            return 1;
             break;
             
         case 1:
             return 3;
             break;
-
+            
         case 2:
             return 3;
             break;
-            
+
         case 3:
             return 3;
             break;
-
+            
         case 4:
+            return 3;
+            break;
+
+        case 5:
             return 9;
             break;
             
@@ -159,6 +168,11 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     if( indexPath.section == 0 )
+    {
+        cell.textLabel.text = @"Input Asset Data";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else if( indexPath.section == 1 )
     {
         if( indexPath.row == 0 )
         {
@@ -185,7 +199,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-    else if( indexPath.section == 1 )
+    else if( indexPath.section == 2 )
     {
         switch (indexPath.row) {
             case 0:
@@ -204,7 +218,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 2 )
+    else if( indexPath.section == 3 )
     {
         switch (indexPath.row) {
             case 0:
@@ -223,7 +237,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 3 )
+    else if( indexPath.section == 4 )
     {
         switch (indexPath.row) {
             case 0:
@@ -242,7 +256,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 4 )
+    else if( indexPath.section == 5 )
     {
         switch (indexPath.row ) {
             case 0:
@@ -293,13 +307,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if( indexPath.section > 1 )
+    if( indexPath.section > 2 )
     {
         MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Adding item to queue...";
     }
     
     if( indexPath.section == 0 )
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
+        AddNewHHSAssetViewController *newView = [[AddNewHHSAssetViewController alloc]initWithNibName:@"AddNewHHSAsset" bundle:nil];
+        [self.navigationController pushViewController:newView animated:YES];
+    }
+    else if( indexPath.section == 1 )
     {
         if( indexPath.row == 0 )
         {
@@ -378,7 +399,7 @@
             [hud hide:YES afterDelay:2.0];
         }
     }
-    else if( indexPath.section == 1 )
+    else if( indexPath.section == 2 )
     {
         // HLS content can autoparse the required files for download asynchronously.  This is the preferred method for adding HLS content to the system.
         // The completion block will be called when everything is complete.
@@ -474,7 +495,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 2 )
+    else if( indexPath.section == 3 )
     {
         // DASH files can be downloaded as well.
         switch (indexPath.row)
@@ -579,7 +600,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 3 )
+    else if( indexPath.section == 4 )
     {
         // Standard MP4 files can be downloaded as well.
         switch (indexPath.row) {
@@ -665,7 +686,7 @@
                 break;
         }
     }
-    else if( indexPath.section == 4 )
+    else if( indexPath.section == 5 )
     {
         // All of these options are various error modes for test and example purposes.
         switch (indexPath.row) {

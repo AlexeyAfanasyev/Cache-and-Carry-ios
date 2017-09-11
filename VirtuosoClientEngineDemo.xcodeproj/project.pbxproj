@@ -40,6 +40,10 @@
 		8419F160156C0DFF00B383B3 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 8419F15F156C0DFF00B383B3 /* ModalAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		842B090015754F970016E9E5 /* virtuoso-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 842B08FE15754F970016E9E5 /* virtuoso-icon.png */; };
 		842B090115754F970016E9E5 /* virtuoso-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842B08FF15754F970016E9E5 /* virtuoso-icon@2x.png */; };
+		C4072E0A1F636057008FDB48 /* AddNewHHSAsset.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4072E0C1F636057008FDB48 /* AddNewHHSAsset.xib */; };
+		C4072E0E1F665809008FDB48 /* BackplaneSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4072E0D1F665809008FDB48 /* BackplaneSettings.xib */; };
+		C4072E101F665830008FDB48 /* BackplaneSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4072E0F1F665830008FDB48 /* BackplaneSettingsViewController.swift */; };
+		C485FA6C1F61C174006F8A15 /* AddNewHHSAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C485FA6B1F61C174006F8A15 /* AddNewHHSAssetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +131,11 @@
 		84A620CD1591062800CF7A85 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		84A620CF1591066700CF7A85 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		84D9C0411579165C00E5BDE8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C4072E0B1F636057008FDB48 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddNewHHSAsset.xib; sourceTree = "<group>"; };
+		C4072E0D1F665809008FDB48 /* BackplaneSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackplaneSettings.xib; sourceTree = "<group>"; };
+		C4072E0F1F665830008FDB48 /* BackplaneSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackplaneSettingsViewController.swift; sourceTree = "<group>"; };
+		C485FA6A1F61C174006F8A15 /* VirtuosoClientEngineDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VirtuosoClientEngineDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		C485FA6B1F61C174006F8A15 /* AddNewHHSAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewHHSAssetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +254,10 @@
 				8419EFA5156AA6A300B383B3 /* ViewController_iPhone.xib */,
 				8419F15B156C059300B383B3 /* SettingsView.xib */,
 				8419EF97156AA6A300B383B3 /* Supporting Files */,
+				C4072E0C1F636057008FDB48 /* AddNewHHSAsset.xib */,
+				C485FA6B1F61C174006F8A15 /* AddNewHHSAssetViewController.swift */,
+				C4072E0D1F665809008FDB48 /* BackplaneSettings.xib */,
+				C4072E0F1F665830008FDB48 /* BackplaneSettingsViewController.swift */,
 			);
 			path = VirtuosoClientEngineDemo;
 			sourceTree = "<group>";
@@ -252,6 +265,7 @@
 		8419EF97156AA6A300B383B3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C485FA6A1F61C174006F8A15 /* VirtuosoClientEngineDemo-Bridging-Header.h */,
 				842B08FE15754F970016E9E5 /* virtuoso-icon.png */,
 				842B08FF15754F970016E9E5 /* virtuoso-icon@2x.png */,
 				8419EF98156AA6A300B383B3 /* VirtuosoClientEngineDemo-Info.plist */,
@@ -314,6 +328,7 @@
 				TargetAttributes = {
 					8419EF8B156AA6A300B383B3 = {
 						DevelopmentTeam = 6C5B687R9E;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -356,9 +371,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8419EF9B156AA6A300B383B3 /* InfoPlist.strings in Resources */,
+				C4072E0A1F636057008FDB48 /* AddNewHHSAsset.xib in Resources */,
 				8419EFA7156AA6A300B383B3 /* ViewController_iPhone.xib in Resources */,
 				8419F15C156C059300B383B3 /* SettingsView.xib in Resources */,
 				842B090015754F970016E9E5 /* virtuoso-icon.png in Resources */,
+				C4072E0E1F665809008FDB48 /* BackplaneSettings.xib in Resources */,
 				842B090115754F970016E9E5 /* virtuoso-icon@2x.png in Resources */,
 				03F9B70B1745405200929556 /* Default-568h@2x.png in Resources */,
 				03D5862E17A05C1500057F1F /* AddNewItemViewController.xib in Resources */,
@@ -391,6 +408,8 @@
 			files = (
 				03FFA0E91A72C8A80003FAB1 /* VirtuosoMoviePlayerViewController.m in Sources */,
 				8419EF9D156AA6A300B383B3 /* main.m in Sources */,
+				C485FA6C1F61C174006F8A15 /* AddNewHHSAssetViewController.swift in Sources */,
+				C4072E101F665830008FDB48 /* BackplaneSettingsViewController.swift in Sources */,
 				8419EFA1156AA6A300B383B3 /* AppDelegate.m in Sources */,
 				8419EFA4156AA6A300B383B3 /* ViewController.m in Sources */,
 				8419F15A156C057E00B383B3 /* SettingsViewController.m in Sources */,
@@ -428,6 +447,14 @@
 				8419EFA6156AA6A300B383B3 /* en */,
 			);
 			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		C4072E0C1F636057008FDB48 /* AddNewHHSAsset.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4072E0B1F636057008FDB48 /* en */,
+			);
+			name = AddNewHHSAsset.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -527,6 +554,9 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VirtuosoClientEngineDemo/VirtuosoClientEngineDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -558,6 +588,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VirtuosoClientEngineDemo/VirtuosoClientEngineDemo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
